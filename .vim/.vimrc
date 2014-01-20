@@ -1,8 +1,13 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
 " Remove all auto commands so they aren't defined twice
 autocmd!
-
-" Pathogen
-execute pathogen#infect()
 
 " Auto reload and write to disk
 set autoread autowrite
@@ -59,14 +64,10 @@ set guifont=Droid\ Sans\ Mono\ for\ Powerline
 
 " Ignore build directories and backup files
 set wildignore+=build/**,build-clang/**,build-w64/**,*~
+set wildmode=longest,list
 
 " Respect .bashrc
 set shell=bash\ --login
-
-" Solarized colorscheme
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
 
 " Highlight current line
 set cursorline
@@ -97,17 +98,19 @@ set tags+=~/.vim/tags/sigc++.2.0.tags
 set tags+=~/.vim/tags/std.tags
 map <C-F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-" OmniCppComplete
+" Swap file location
+set dir=/var/tmp//,$HOME\\vim_swap//
+
+" Enable filetype plugins
 filetype plugin on
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest
+
+" Bundles
+Bundle 'vim-scripts/RelOps'
+Bundle 'altercation/vim-colors-solarized'
+
+
+" Solarized colorscheme
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
