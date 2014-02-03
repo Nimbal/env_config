@@ -1,16 +1,32 @@
-set nocompatible
-filetype off
+""""""""""
+" Vundle "
+""""""""""
+set nocompatible    " Use vim behaviour, not vi
+filetype off        " Required by Vundle, re-enabled later on
 
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+call vundle#rc()                
 
+" Bundles
 Bundle 'gmarik/vundle'
+Bundle 'vim-scripts/RelOps'
+Bundle 'altercation/vim-colors-solarized'
 
-" Remove all auto commands so they aren't defined twice
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+
+
+
 autocmd!
 
 " Auto reload and write to disk
 set autoread autowrite
+
+"""""""""""""
+" Shortcuts "
+"""""""""""""
 
 " Better window switching keybinds
 map <C-H> <C-W>h
@@ -94,7 +110,6 @@ set secure
 
 " Tags
 set tags+=~/.vim/tags/qt4.tags
-set tags+=~/.vim/tags/sigc++.2.0.tags
 set tags+=~/.vim/tags/std.tags
 map <C-F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
@@ -104,9 +119,6 @@ set dir=/var/tmp//,$HOME\\vim_swap//
 " Enable filetype plugins
 filetype plugin on
 
-" Bundles
-Bundle 'vim-scripts/RelOps'
-Bundle 'altercation/vim-colors-solarized'
 
 
 " Solarized colorscheme
