@@ -19,6 +19,8 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
+Bundle "tpope/vim-dispatch"
+Bundle "tpope/vim-unimpaired"
 
 
 
@@ -43,20 +45,27 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+"Map vim-dispatch's Make to F5
+nnoremap <F5> :wa<CR>:Make<CR>
+
+""""""""""""
+" UI Stuff "
+""""""""""""
+
 " Disable menu & toolbars in GUI mode
 set guioptions-=M
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
 set history=50		" keep 50 lines of command line history
 set ruler		    " show the cursor position all the time
 set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
+set shortmess+=I    " Don't show intro message on startup
 
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
@@ -68,6 +77,11 @@ syntax on
 
 " Auto indenting
 set autoindent
+
+if has("gui_running")
+    " Disable error bell
+    autocmd GUIEnter * set vb t_vb=
+endif
 
 " vim-airline
 set encoding=utf-8
@@ -110,7 +124,8 @@ autocmd FileType qf setlocal wrap linebreak
 
 " Enable per-project settings
 set exrc
-set secure
+"set secure " Disabled because otherwise, I can't set makeprg in project local
+"vimrc in Windows
 
 
 " Tags
