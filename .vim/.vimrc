@@ -1,10 +1,12 @@
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
 """"""""""
 " Vundle "
 """"""""""
 set nocompatible    " Use vim behaviour, not vi
 filetype off        " Required by Vundle, re-enabled later on
 
-set rtp+=~/.vim/bundle/vundle
+execute "set rtp+=" . s:path . "/bundle/vundle"
 call vundle#rc()                
 
 " Bundles
@@ -12,6 +14,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/RelOps'
 Bundle 'altercation/vim-colors-solarized'
 
+Bundle "bling/vim-airline"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -66,12 +69,12 @@ syntax on
 " Auto indenting
 set autoindent
 
-" Powerline
+" vim-airline
+set encoding=utf-8
 set laststatus=2
-set rtp+=/usr/local/lib/python2.7/dist-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
 set noshowmode " Don't show vims normal mode line
-" set term=xterm-256color
-set guifont=Droid\ Sans\ Mono\ for\ Powerline
+let g:airline_powerline_fonts = 1
+set guifont=Powerline_Consolas:h12
 
 " CMake
 :autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim 
@@ -83,7 +86,9 @@ set wildignore+=build/**,build-clang/**,build-w64/**,*~
 set wildmode=longest,list
 
 " Respect .bashrc
-set shell=bash\ --login
+if has("unix")
+    set shell=bash\ --login
+endif
 
 " Highlight current line
 set cursorline
@@ -114,7 +119,7 @@ set tags+=~/.vim/tags/std.tags
 map <C-F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " Swap file location
-set dir=/var/tmp//,$HOME\\vim_swap//
+set dir=/var/tmp//,$HOME\\vim_swap//,$TMP
 
 " Enable filetype plugins
 filetype plugin on
