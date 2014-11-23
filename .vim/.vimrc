@@ -21,6 +21,7 @@ Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "tpope/vim-dispatch"
 Bundle "tpope/vim-unimpaired"
+Bundle "tpope/vim-fugitive"
 
 
 
@@ -56,10 +57,17 @@ nnoremap <F5> :wa<CR>:Make<CR>
 """"""""""""
 
 " Disable menu & toolbars in GUI mode
-set guioptions-=M
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=e  " No tab pages
+set guioptions-=M  " Don't source menu.vim
+set guioptions-=m  " No menu bar
+set guioptions-=t  " No tearoff menu items
+set guioptions-=T  " No toolbar
+set guioptions-=l  " No left-hand scroll bar
+set guioptions-=L  " No left-hand scroll bar, even when split
+set guioptions-=r  " No right-hand scroll bar
+set guioptions-=R  " No right-hand scroll bar, even when split
+set guioptions-=b  " No bottom scrollbar
+set guioptions-=h  " No bottom scrollbar length
 
 set history=50		" keep 50 lines of command line history
 set ruler		    " show the cursor position all the time
