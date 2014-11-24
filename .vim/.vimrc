@@ -53,7 +53,11 @@ noremap <Right> <Nop>
 set backspace=indent,eol,start
 
 "Map vim-dispatch's Make to F5
-nnoremap <F5> :wa<CR>:Make<CR>
+if has("win32")
+    nnoremap <F5> :wa<CR>:Make<CR>
+else
+    nnoremap <F5> :wa<CR>:make<CR>
+endif
 
 """"""""""""
 " UI Stuff "
@@ -130,7 +134,8 @@ endif
 " Highlight current line
 set cursorline
 
-" Show relative numbers in gutter
+" Show relative numbers in gutter, absolute number for current line
+set number
 set relativenumber
 
 " Tabs
