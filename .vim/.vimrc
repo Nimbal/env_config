@@ -12,7 +12,7 @@ call vundle#rc()
 " Bundles
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/RelOps'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'morhetz/gruvbox'
 
 Bundle "bling/vim-airline"
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -24,6 +24,7 @@ Bundle "tpope/vim-unimpaired"
 Bundle "tpope/vim-fugitive"
 Bundle "mrtazz/DoxygenToolkit.vim"
 Bundle "kien/ctrlp.vim"
+Bundle "airblade/vim-gitgutter"
 
 
 
@@ -52,12 +53,7 @@ noremap <Right> <Nop>
 set backspace=indent,eol,start
 
 "Map vim-dispatch's Make to F5
-if has("win32")
-    nnoremap <F5> :wa<CR>:Make<CR>
-else
-    " My linux setup makes vim-dispatch use plain old blocking :make
-    nnoremap <F5> :wa<CR>:Make!<CR>
-endif
+nnoremap <F5> :wa<CR>:Make<CR>
 
 """"""""""""
 " UI Stuff "
@@ -133,7 +129,9 @@ endif
 
 " Highlight current line
 set cursorline
-set number
+
+" Show relative numbers in gutter
+set relativenumber
 
 " Tabs
 set smartindent
@@ -170,6 +168,5 @@ filetype plugin on
 
 " Solarized colorscheme
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme gruvbox
 
