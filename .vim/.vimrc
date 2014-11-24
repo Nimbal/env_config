@@ -22,6 +22,8 @@ Bundle "honza/vim-snippets"
 Bundle "tpope/vim-dispatch"
 Bundle "tpope/vim-unimpaired"
 Bundle "tpope/vim-fugitive"
+Bundle "mrtazz/DoxygenToolkit.vim"
+Bundle "kien/ctrlp.vim"
 
 
 
@@ -95,8 +97,14 @@ endif
 set encoding=utf-8
 set laststatus=2
 set noshowmode " Don't show vims normal mode line
+
+" Font
 let g:airline_powerline_fonts = 1
-set guifont=Powerline_Consolas:h12
+if has("win32")
+    set guifont=Powerline_Consolas:h12
+else
+    set guifont=Inconsolata\ for\ Powerline\ 12
+endif
 
 " CMake
 :autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim 
@@ -104,8 +112,14 @@ set guifont=Powerline_Consolas:h12
 :autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake
 
 " Ignore build directories and backup files
-set wildignore+=build/**,build-clang/**,build-w64/**,*~
+if exists("g:ctrlp_user_command")
+    unlet g:ctrlp_user_command
+endif
+set wildignore+=build/**,*/build-*,*~,*/CMakeFiles/**
 set wildmode=longest,list
+
+" Ctrl-P
+let g:ctrlp_working_path_mode = "0"
 
 " Respect .bashrc
 if has("unix")
