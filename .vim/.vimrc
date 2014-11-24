@@ -7,7 +7,7 @@ set nocompatible    " Use vim behaviour, not vi
 filetype off        " Required by Vundle, re-enabled later on
 
 execute "set rtp+=" . s:path . "/bundle/vundle"
-call vundle#rc()                
+call vundle#rc()
 
 " Bundles
 Bundle 'gmarik/vundle'
@@ -52,7 +52,12 @@ noremap <Right> <Nop>
 set backspace=indent,eol,start
 
 "Map vim-dispatch's Make to F5
-nnoremap <F5> :wa<CR>:Make<CR>
+if has("win32")
+    nnoremap <F5> :wa<CR>:Make<CR>
+else
+    " My linux setup makes vim-dispatch use plain old blocking :make
+    nnoremap <F5> :wa<CR>:Make!<CR>
+endif
 
 """"""""""""
 " UI Stuff "
@@ -107,7 +112,7 @@ else
 endif
 
 " CMake
-:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim 
+:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim
 :autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
 :autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake
 
