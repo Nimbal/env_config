@@ -1,37 +1,135 @@
-let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+" Clear all autocommands. Otherwise, re-sourcing this vimrc might get weird
+autocmd!
+
 
 """"""""""
 " Vundle "
 """"""""""
-set nocompatible    " Use vim behaviour, not vi
-filetype off        " Required by Vundle, re-enabled later on
 
+" Use vim behaviour, not vi
+set nocompatible    
+
+" Required by Vundle, re-enabled later on
+filetype off        
+
+" Find directory of this script (resolving symlinks)
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+" Add bundles to runtime path
 execute "set rtp+=" . s:path . "/bundle/vundle"
+
+" Init vundle
 call vundle#rc()
 
-" Bundles
+
+"""""""""""
+" Plugins "
+"""""""""""
+
+" Vundle Plugin manager
 Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/RelOps'
+
+" Gruvbox color scheme
 Bundle 'morhetz/gruvbox'
 
+" Airline status line
 Bundle "bling/vim-airline"
+
+" Snipmate Dependencies
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
+
+" Insert predefined text blocks
 Bundle "garbas/vim-snipmate"
+
+" Some default snippets for snipmate
 Bundle "honza/vim-snippets"
+
+" Async commands like make
 Bundle "tpope/vim-dispatch"
+
+" Shortcuts for going through quickfix list (and others)
 Bundle "tpope/vim-unimpaired"
+
+" Git integration
 Bundle "tpope/vim-fugitive"
+
+" Doxygen tools
 Bundle "mrtazz/DoxygenToolkit.vim"
+
+" Fuzzy file opener
 Bundle "kien/ctrlp.vim"
+
+" Show linewise changes in the gutter (besides line numbers)
 Bundle "airblade/vim-gitgutter"
 
+" Ack-grep
+Bundle "mileszs/ack.vim"
 
 
-autocmd!
+"""""""""""""""
+" Basic stuff "
+"""""""""""""""
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
 
 " Auto reload and write to disk
 set autoread autowrite
+
+" Keep 50 lines of command line history
+set history=50		
+
+" Show currently running command, also provides information about selected
+" area in visual mode
+set showcmd		    
+
+" Use incremental searching
+set incsearch		
+
+" Don't show intro message on startup
+set shortmess+=I    
+
+
+" Switch syntax highlighting on
+syntax on
+
+" Respect .bashrc
+if has("unix")
+    set shell=bash\ --login
+endif
+
+" Highlight current line
+set cursorline
+
+" Show relative numbers in gutter, absolute number for current line
+set number
+set relativenumber
+
+" Enable per-project settings
+set exrc
+
+" Disable shenanigans for local vimrc. Unfortunately, this causes trouble in
+" Windows because it can't handle ownership of the local .vimrc like Unix can.
+" Among other things, we can't set the makeprg there. So only enable it for
+" unix.
+if has("unix")
+    set secure
+endif
+
+" Swap file location
+set dir=/var/tmp//,$HOME\\vim_swap//,$TMP
+
+" Enable filetype plugins
+filetype plugin on
+
+" Never wrap lines by default
+set nowrap
+
+" Wrap lines for quickfix window
+autocmd FileType qf setlocal wrap linebreak
+
 
 """""""""""""
 " Shortcuts "
@@ -56,6 +154,8 @@ set backspace=indent,eol,start
 if has("win32")
     nnoremap <F5> :wa<CR>:Make<CR>
 else
+    " Can't really make vim-dispatch work properly in Linux, use default :make
+    " for now
     nnoremap <F5> :wa<CR>:make<CR>
 endif
 
@@ -76,34 +176,26 @@ set guioptions-=R  " No right-hand scroll bar, even when split
 set guioptions-=b  " No bottom scrollbar
 set guioptions-=h  " No bottom scrollbar length
 
-set history=50		" keep 50 lines of command line history
-set ruler		    " show the cursor position all the time
-set showcmd		    " display incomplete commands
-set incsearch		" do incremental searching
-set shortmess+=I    " Don't show intro message on startup
-
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" Switch syntax highlighting on
-syntax on
-
-" Auto indenting
-set autoindent
-
 if has("gui_running")
     " Disable error bell
     autocmd GUIEnter * set vb t_vb=
 endif
 
-" vim-airline
-set encoding=utf-8
-set laststatus=2
-set noshowmode " Don't show vims normal mode line
 
-" Font
+"""""""""""
+" Airline "
+"""""""""""
+
+" Set encoding for nice symbols in status line
+set encoding=utf-8
+
+" Always show status line for each window
+set laststatus=2
+
+" Don't show vims normal mode line
+set noshowmode 
+
+" Set font for status line
 let g:airline_powerline_fonts = 1
 if has("win32")
     set guifont=Powerline_Consolas:h12
@@ -111,67 +203,91 @@ else
     set guifont=Inconsolata\ for\ Powerline\ 12
 endif
 
-" CMake
-:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim
-:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
-:autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake
 
-" Ignore build directories and backup files
-if exists("g:ctrlp_user_command")
+"""""""""
+" CMake "
+"""""""""
+
+" Load cmake indent file when editing cmake files
+:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim
+
+" Set filetype to cmake for syntax highlighting
+:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
+
+
+""""""""""
+" Ctrl-P "
+""""""""""
+
+" Unset ctrlp_user_command because the default ignores wildignore
+if exists("g:ctrlp_user_command") 
     unlet g:ctrlp_user_command
 endif
-set wildignore+=build/**,*/build-*,*~,*/CMakeFiles/**
+
+" Ignore all build directories
+set wildignore+=build/**,*/build-*
+
+" Ignore backup files
+set wildignore+=*~
+
+" Ignore CMake cache files
+set wildignore +=*/CMakeFiles/**
+
+" Bash-like tab completion
 set wildmode=longest,list
 
-" Ctrl-P
-let g:ctrlp_working_path_mode = "0"
+" Just use the pwd, don't bother searching in other directories
+let g:ctrlp_working_path_mode = "0" 
 
-" Respect .bashrc
-if has("unix")
-    set shell=bash\ --login
-endif
+" Always use regex search (required for ctrlp_abbrev setting below)
+let g:ctrlp_regexp = 1 
 
-" Highlight current line
-set cursorline
+" Replace <space> with .* in ctrl-p prompt
+let g:ctrlp_abbrev = {
+\ 'gmode': 'i',
+\ 'abbrevs': [
+  \ {
+    \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+    \ 'expanded': '.*',
+    \ 'mode': 'pfrz',
+  \ },
+  \ ]
+\ }
+    
 
-" Show relative numbers in gutter, absolute number for current line
-set number
-set relativenumber
+"""""""""""""
+" Indenting "
+"""""""""""""
 
-" Tabs
+" Auto indent new line
+set autoindent
+
+" Make autoindent smarter
 set smartindent
+
+" Make tabs four spaces wide
 set tabstop=4
+
+" Insert four spaces when indenting lines
 set shiftwidth=4
+
+" Use spaces, no tab stops
 set expandtab
+
+" Insert four spaces when hitting <Tab> in insert mode
 set softtabstop=4
 
-" Scrolling
+" Always keep 10 lines visible between cursor and first / last window line
 set scrolloff=10
 
-" Wrapping
-set nowrap
-autocmd FileType qf setlocal wrap linebreak
 
-" Enable per-project settings
-set exrc
-"set secure " Disabled because otherwise, I can't set makeprg in project local
-"vimrc in Windows
+""""""""""""""""
+" Color scheme "
+""""""""""""""""
 
-
-" Tags
-set tags+=~/.vim/tags/qt4.tags
-set tags+=~/.vim/tags/std.tags
-map <C-F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-" Swap file location
-set dir=/var/tmp//,$HOME\\vim_swap//,$TMP
-
-" Enable filetype plugins
-filetype plugin on
-
-
-
-" Solarized colorscheme
+" Dark theme
 set background=dark
-colorscheme gruvbox
+
+" Use gruvbox, but don't complain if it hasn't been installed yet
+silent! colorscheme gruvbox
 
