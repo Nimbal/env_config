@@ -1,5 +1,15 @@
+# Secret work stuff that shouldn't land in this repository
+/.vim/snippets/pidef.snippets
+
+# Dolphin cache file
 /.directory
+
+# Generated vim tags
 tags/
+
+# netrw history (vim plugin for remote file editing
 .netrwhist
+
+# Vim backup files
 *~
 
