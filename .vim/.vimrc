@@ -66,6 +66,10 @@ Bundle "airblade/vim-gitgutter"
 " Ack-grep
 Bundle "mileszs/ack.vim"
 
+" Note taking
+Bundle "xolox/vim-misc"
+Bundle "xolox/vim-notes"
+
 
 """""""""""""""
 " Basic stuff "
