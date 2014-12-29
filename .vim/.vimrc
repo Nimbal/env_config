@@ -32,6 +32,9 @@ Bundle 'gmarik/vundle'
 " Gruvbox color scheme
 Bundle 'morhetz/gruvbox'
 
+" Skittles Berry color scheme
+Bundle 'shawncplus/skittles_berry'
+
 " Airline status line
 Bundle "bling/vim-airline"
 
@@ -69,6 +72,10 @@ Bundle "mileszs/ack.vim"
 " Note taking
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-notes"
+
+" vim-shell (used by vim-gitgutter, avoids cmd popup in Windows)
+"Bundle "xolox/vim-misc"
+Bundle "xolox/vim-shell"
 
 " Show buffer position as scrollbar
 Bundle "gcavallanti/vim-noscrollbar"
