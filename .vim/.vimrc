@@ -77,10 +77,6 @@ Bundle "xolox/vim-notes"
 "Bundle "xolox/vim-misc"
 Bundle "xolox/vim-shell"
 
-" Show buffer position as scrollbar
-Bundle "gcavallanti/vim-noscrollbar"
-
-
 """""""""""""""
 " Basic stuff "
 """""""""""""""
@@ -216,17 +212,6 @@ if has("win32")
 else
     set guifont=Inconsolata\ for\ Powerline\ 12
 endif
-
-
-"""""""""""""""
-" Noscrollbar "
-"""""""""""""""
-
-" Integrate noscrollbar with airline
-function! Noscrollbar(...)
-    let w:airline_section_z = '%{noscrollbar#statusline()}'
-endfunction
-call airline#add_statusline_func('Noscrollbar')
 
 
 """""""""
