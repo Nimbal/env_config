@@ -213,6 +213,15 @@ else
     set guifont=Inconsolata\ for\ Powerline\ 12
 endif
 
+" Disable some sections
+" b: git branch
+" x: filetype
+" y: file encoding
+let g:airline_section_b = ''
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+
+let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
 """""""""
 " CMake "
