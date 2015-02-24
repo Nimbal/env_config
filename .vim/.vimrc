@@ -210,7 +210,7 @@ let g:airline_powerline_fonts = 1
 if has("win32")
     set guifont=Powerline_Consolas:h12
 else
-    set guifont=Inconsolata\ for\ Powerline\ 12
+    set guifont=Inconsolata\ for\ Powerline\ 10
 endif
 
 " Disable some sections
