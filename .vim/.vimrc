@@ -63,19 +63,12 @@ Bundle "mrtazz/DoxygenToolkit.vim"
 " Fuzzy file opener
 Bundle "kien/ctrlp.vim"
 
-" Show linewise changes in the gutter (besides line numbers)
-Bundle "airblade/vim-gitgutter"
-
 " Ack-grep
 Bundle "mileszs/ack.vim"
 
 " Note taking
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-notes"
-
-" vim-shell (used by vim-gitgutter, avoids cmd popup in Windows)
-"Bundle "xolox/vim-misc"
-Bundle "xolox/vim-shell"
 
 """""""""""""""
 " Basic stuff "
