@@ -67,6 +67,9 @@ Bundle "mileszs/ack.vim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-notes"
 
+" Better f/t
+Bundle "unblevable/quick-scope"
+
 """""""""""""""
 " Basic stuff "
 """""""""""""""
