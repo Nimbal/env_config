@@ -54,9 +54,6 @@ Bundle "tpope/vim-dispatch"
 " Shortcuts for going through quickfix list (and others)
 Bundle "tpope/vim-unimpaired"
 
-" Git integration
-Bundle "tpope/vim-fugitive"
-
 " Doxygen tools
 Bundle "mrtazz/DoxygenToolkit.vim"
 
