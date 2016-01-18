@@ -67,8 +67,17 @@ Bundle "mileszs/ack.vim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-notes"
 
+" GLSL syntax highlighting
+Bundle "tikhomirov/vim-glsl"
+
 " Better f/t
 Bundle "unblevable/quick-scope"
+
+" HLSL syntax highlighting
+Bundle "beyondmarc/hlsl.vim"
+
+" Git integration
+Bundle "tpope/vim-fugitive"
 
 """""""""""""""
 " Basic stuff "
@@ -201,7 +210,7 @@ set noshowmode
 " Set font for status line
 let g:airline_powerline_fonts = 1
 if has("win32")
-    set guifont=Powerline_Consolas:h12
+    set guifont=Powerline_Consolas:h10
 else
     set guifont=Inconsolata\ for\ Powerline\ 10
 endif
@@ -302,4 +311,18 @@ set background=dark
 
 " Use gruvbox, but don't complain if it hasn't been installed yet
 silent! colorscheme gruvbox
+
+
+""""""""""""
+" Encoding "
+""""""""""""
+set encoding=utf-8
+setglobal fileencoding=utf-8
+set fileencodings=utf-8,latin1
+
+
+"""""""
+" Git "
+"""""""
+set diffopt=filler,vertical
 
