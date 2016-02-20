@@ -27,7 +27,7 @@ call vundle#rc()
 """""""""""
 
 " Vundle Plugin manager
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim'
 
 " Gruvbox color scheme
 Bundle 'morhetz/gruvbox'
