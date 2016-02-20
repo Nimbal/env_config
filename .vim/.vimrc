@@ -36,7 +36,8 @@ Bundle 'morhetz/gruvbox'
 Bundle 'shawncplus/skittles_berry'
 
 " Airline status line
-Bundle "bling/vim-airline"
+Bundle "vim-airline/vim-airline"
+Bundle "vim-airline/vim-airline-themes"
 
 " Snipmate Dependencies
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -224,6 +225,7 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
+AirlineTheme bubblegum
 
 """""""""
 " CMake "
