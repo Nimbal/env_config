@@ -225,7 +225,7 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
-AirlineTheme bubblegum
+let g:airline_theme='bubblegum'
 
 """""""""
 " CMake "
