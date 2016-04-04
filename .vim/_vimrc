@@ -1,0 +1,6 @@
+" Put this into C:\Users\$USER_NAME and change the below path
+
+let ENV_CONFIG_DIR="C:\\code\\env_config"
+
+execute "source ".ENV_CONFIG_DIR."\\.vim\\.vimrc"
+execute "set rtp+=".$ENV_CONFIG_DIR."\\.vim\after\\"
